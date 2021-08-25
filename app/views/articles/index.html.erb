@@ -1,0 +1,30 @@
+<h1>Mis artículos</h1>
+
+<style>
+    .contenedor-articulos{
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        justify-content: center;
+        grid-gap: 1.5em;
+        margin: 1em;
+    }
+    .contenedor-articulos-item{
+        padding: 15px;
+        width: 100%;
+        box-shadow: 3px 2px 1px #a6a6a6, 2px 1px 0px white, 1px 0px 0px #e6e6e6;
+        transition: all .3s;
+    }
+    .contenedor-articulos-item:hover{
+        transform: scale(1.05);
+    }
+    a{
+        text-decoration: none;
+    }
+</style>
+
+<div class="contenedor-articulos">
+    <%= render @articles %>
+</div>
+
+<%= link_to "Crear nuevo", "articles/new"  %>
+
