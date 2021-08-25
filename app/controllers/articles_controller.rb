@@ -1,4 +1,9 @@
 class ArticlesController < ApplicationController
+
+    def index
+       @articles = Article.all 
+    end
+
     def new
         #Creamos un nuevo articulo vacío
         #Una variable con @, es una variable que se pasa del controlador a la vista
@@ -8,7 +13,7 @@ class ArticlesController < ApplicationController
     end
 
     def create
-        @article = Article.create(title: params[:article][:title], status: params[:article][:status])
+        @article = Article.create(title: params[:article][:title], status: params[:article][:status], content: params[:article][:content])
         render json: @article
     end
     
