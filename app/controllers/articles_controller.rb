@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
     before_action :find_article, only: [:show, :edit, :update, :destroy]
-
+    before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
     def index
         @articles = Article.all
     end
@@ -20,7 +20,7 @@ class ArticlesController < ApplicationController
 
     def create
         @article = Article.create(title: params[:article][:title], status: params[:article][:status], content: params[:article][:content])
-        redirect_to root_path
+        redirect_to articles_path 
     end
     def update
         @article.update(title: params[:article][:title], content: params[:article][:content], status: params[:article][:status])
