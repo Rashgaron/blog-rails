@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   get "articles", to: "articles#index"
   get "articles/new", to: "articles#new", as: :new_articles
-  get "articles/:id/edit", to: "articles#edit"
+  get "articles/:id/edit", to: "articles#edit", as: :edit_article
   post "articles", to:"articles#create"
 
   patch "/articles/:id", to: "articles#update", as: :article

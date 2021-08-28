@@ -6,6 +6,7 @@ class ArticlesController < ApplicationController
     end
 
     def show
+        @current_user_id = current_user.id
     end
 
     def edit
@@ -19,21 +20,29 @@ class ArticlesController < ApplicationController
     end
 
     def create
-        @article = Article.create(title: params[:article][:title], status: params[:article][:status], content: params[:article][:content])
-        redirect_to articles_path 
+        @article = current_user.articles.create(article_params)
+        redirect_to @article 
     end
     def update
-        @article.update(title: params[:article][:title], content: params[:article][:content], status: params[:article][:status])
-        render json: @article
-        redirect_to @article
+        if @article.update(article_params)
+            redirect_to @article
+        else
+            redirect_to :index
+        end
     end
     def destroy
         @article.destroy
         redirect_to root_path
     end
     
-    def find_article
-        @article = Article.find(params[:id])
-    end
+    private
+
+        def find_article
+            @article = Article.find(params[:id])
+        end
+
+        def article_params
+            params.require(:article).permit(:title, :content, :status)
+        end
 
 end

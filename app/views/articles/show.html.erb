@@ -2,9 +2,17 @@
 <div>
     <%= @article.content %>
 </div>
+
+<% if @current_user_id == @article.user_id %>
+    <div>
+        <%= link_to "Editar artículo",  edit_article_path(@article) %>
+    </div>
+<% end %>
+
 <div>
     <%= link_to "Eliminar el articulo", @article, method: :delete %>
 </div>
+
 <div>
     <%= link_to "Volver a artículos", "/articles" %>
 </div>
